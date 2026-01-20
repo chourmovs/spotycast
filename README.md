@@ -7,7 +7,7 @@ This repository is intentionally lightweight and serves as the public entry poin
 ## Documentation & installation
 
 All docs and the ready-to-run setup are hosted here:
-**https://spotycast.duckdns.org**
+**https://spotycast.ovh**
 
 ## What it does (high level)
 
