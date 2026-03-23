@@ -1,65 +1,163 @@
-# Spotycast
+# Spotycast — Spotify to Icecast Bridge (Roon, LMS, Volumio)
 
-Spotycast is a Docker-based audio bridge that exposes Spotify playback as a standard HTTP/Icecast stream on your local network.
+Spotycast turns Spotify playback into a stable HTTP / Icecast stream that can be consumed by Roon, LMS (Lyrion), Volumio and any network audio player supporting radio URLs.
 
-It is designed for mixed audio setups where you want to reuse a single playback chain (DAC/amp/speakers) across systems like Roon and LMS/Lyrion, without adding extra dedicated Spotify hardware.
+It restores a missing layer in many audio stacks: a reliable, reusable **radio-style endpoint** for Spotify.
 
-Website / docs: https://spotycast.ovh
+---
 
-## What problem does this solve?
+## Spotify Lossless with Roon
 
-Spotify is often isolated from existing “audiophile” or self-hosted playback stacks. If your main system is Roon, LMS/Lyrion, or a network player that can read HTTP radio streams, integrating Spotify can mean:
-- adding another Spotify Connect device
-- switching inputs on the DAC/amp
-- relying on brittle integrations that can break when upstream behavior changes
+Spotify is introducing higher-quality playback and Exclusive Mode (bit-perfect on Windows).
 
-Spotycast treats Spotify as an external source and makes it consumable by any client that can play a standard HTTP stream.
+However, **Spotify still does not integrate with Roon natively**.
 
-## How it works (high level)
+➡️ Full breakdown:  
+https://spotycast.ovh/spotify-lossless-roon/
 
-- A Spotify endpoint runs inside an isolated Docker environment.
-- Audio output is captured and published as a clean HTTP/Icecast stream.
-- Your existing player (Roon, LMS/Lyrion, network players, etc.) consumes that stream like any other “web radio” source.
+In practice:
 
-This keeps the rest of your playback chain unchanged.
+- You **cannot use Spotify Lossless directly inside Roon**
+- Spotycast provides a **workaround via HTTP streaming**
+- This introduces a republishing layer (not strictly bit-perfect)
+- But enables **stable integration across your audio system**
 
-## Typical use cases
+---
 
-- Reuse one DAC for Spotify and other sources
-- Add Spotify playback to Roon or LMS/Lyrion as a standard network stream
-- Avoid extra Spotify Connect hardware devices
-- Keep a predictable playback path in mixed setups
+## What Spotycast does
 
-## Audio quality and expectations
+Spotycast republishes Spotify playback as a standard HTTP stream:
 
-Audio quality depends on the playback path used.
+```
+Spotify → PulseAudio → Liquidsoap → Icecast → Player (Roon / LMS / Volumio)
+```
 
-- Open Spotify Connect implementations are typically limited to Spotify’s “Very High” quality (often up to ~320 kbps).
-- An optional setup can expose the stream as FLAC over HTTP. When Spotify’s lossless tier is available for the account/region and enabled, this is intended to avoid unnecessary transcoding at the bridge level.
+Instead of relying on native Spotify support on every device, you expose a single **radio endpoint URL** usable everywhere.
 
-This is not a blanket claim that playback is always lossless; availability depends on Spotify and client behavior.
+---
 
-## Editions
+## Use cases
 
-- **Free**: standard installation, stable MP3/AAC stream (lossy).
-- **Premium**: additional convenience features, FLAC streaming support, update/rollback support.
+- Spotify with Roon  
+  https://spotycast.ovh/spotify-with-roon/
 
-## FAQ
+- Spotify to Icecast bridge  
+  https://spotycast.ovh/spotify-to-icecast/
 
-### Can Spotify be used with Roon?
-Spotify is not natively supported by Roon. Spotycast exposes Spotify playback as a standard HTTP stream that Roon can consume as a network audio source.
+- Installation guide (Docker / Debian)  
+  https://spotycast.ovh/how-to-install/
 
-### Is this a replacement for Spotify Connect?
-No. Spotycast uses Spotify playback and exposes the audio externally rather than replacing Spotify Connect.
+- Architecture and pipeline  
+  https://spotycast.ovh/how-it-works/
 
-### Is this a public broadcast?
-No. Spotycast is designed for local playback within a private network (LAN). It is not intended for public redistribution.
+---
 
-## Support
+## Why this approach matters
 
-- Issues: https://github.com/chourmovs/spotycast/issues
-- Website / documentation: https://spotycast.ovh
+In many real-world setups, the weakest point is not the DAC or the renderer — it's the lack of a stable source.
+
+Spotycast solves this by:
+
+- creating a **consistent HTTP stream**
+- decoupling Spotify from playback devices
+- enabling compatibility with legacy or mixed systems
+- providing a **single URL your entire stack can consume**
+
+---
+
+## Limitations
+
+Spotycast is intentionally not a "bit-perfect" solution.
+
+- Audio is **republished through Liquidsoap**
+- Not a native Spotify integration in Roon
+- Depends on Spotify playback behavior
+- Introduces buffering (HTTP streaming latency)
+
+This is a trade-off:
+
+➡️ You lose strict bit-perfect playback  
+➡️ You gain a **stable, network-wide audio endpoint**
+
+---
+
+## Free vs Premium
+
+Spotycast supports two modes:
+
+### Free (Spotify Connect path)
+- Stable and simple
+- Up to Spotify's standard quality (~320 kbps)
+
+### Premium (advanced path)
+- FLAC / lossless-oriented workflow (where available)
+- Additional automation and control features
+
+More details:  
+https://spotycast.ovh/version-premium/
+
+---
+
+## Quick start
+
+Deploy the container (example):
+
+```bash
+docker compose up -d
+```
+
+Then inside the container:
+
+```bash
+cd /root/binaries
+./spotifyd-free
+```
+
+Open Icecast:
+
+```
+http://<HOST>:28000
+```
+
+Copy a mountpoint and add it as a radio stream in your player.
+
+---
+
+## When should you use Spotycast?
+
+Spotycast is useful if:
+
+- You use Roon but want Spotify as a source
+- Your devices don't support Spotify natively
+- You want a **stable LAN endpoint**
+- You prefer a **radio-style architecture**
+
+---
+
+## When you should NOT use it
+
+- If you need strict bit-perfect playback to a DAC
+- If you only listen from a single desktop device
+- If native Spotify apps already meet your needs
+
+---
+
+## Related resources
+
+- Spotify Lossless with Roon  
+  https://spotycast.ovh/spotify-lossless-roon/
+
+- Spotify to Icecast  
+  https://spotycast.ovh/spotify-to-icecast/
+
+- How it works  
+  https://spotycast.ovh/how-it-works/
+
+- FAQ  
+  https://spotycast.ovh/faq/
+
+---
 
 ## License
 
-Choose a license and add it as `LICENSE` (MIT is usually a good default for permissive distribution).
+See repository license.
