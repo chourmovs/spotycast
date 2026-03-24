@@ -1,11 +1,8 @@
 <!--
 Spotycast README — SEO / conversion oriented GitHub landing page
-Palette aligned with social preview:
-- bg spirit: #0b1220 / #14233a
-- green: #1db954
-- blue: #457aff
-- teal: #1abc9c
-- violet: #8a5fff
+Uses the full-wide social preview image generated for this repository.
+Expected image path in repo:
+./assets/spotycast_github_social_preview_fullwide.png
 -->
 
 <p align="center">
@@ -25,6 +22,10 @@ Palette aligned with social preview:
 <p align="center">
   <strong>Turn Spotify playback into a stable HTTP / Icecast stream for Roon, LMS (Lyrion), Volumio and network players.</strong><br>
   Restore the radio-style endpoint your audiophile stack is missing.
+</p>
+
+<p align="center">
+  <img src="./assets/spotycast_github_social_preview_fullwide.png" alt="Spotycast full-wide social preview" width="100%">
 </p>
 
 ---
