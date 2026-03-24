@@ -370,34 +370,6 @@ Because Icecast gives you a standard, reusable, inspectable HTTP endpoint that m
 
 ---
 
-## Suggested GitHub repository topics
-
-If you want to maximize discovery on GitHub, these are strong candidate topics for this repo:
-
-```text
-spotify
-spotify-connect
-spotifyd
-icecast
-liquidsoap
-roon
-lms
-lyrion
-volumio
-http-stream
-internet-radio
-self-hosted
-docker
-docker-compose
-debian
-network-audio
-headless-audio
-spotify-lossless
-spotify-bridge
-icecast-stream
-```
-
----
 
 ## License
 
