@@ -25,7 +25,7 @@ Expected image path in repo:
 </p>
 
 <p align="center">
-  <img src="spotycast_github_social_preview.png" alt="Spotycast full-wide social preview" width="100%">
+  <img src=".assets/spotycast_github_social_preview.png" alt="Spotycast full-wide social preview" width="100%">
 </p>
 
 ---
