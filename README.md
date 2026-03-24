@@ -31,7 +31,7 @@ Palette aligned with social preview:
 
 <table>
   <tr>
-    <td width="58%" valign="top">
+    <td width="68%" valign="top">
 
 ## Why Spotycast exists
 
