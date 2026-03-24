@@ -1,7 +1,7 @@
 <!--
 Spotycast README — SEO / conversion oriented GitHub landing page
 Palette aligned with social preview:
-- bg: #0b1220 / #14233a
+- bg spirit: #0b1220 / #14233a
 - green: #1db954
 - blue: #457aff
 - teal: #1abc9c
@@ -29,15 +29,14 @@ Palette aligned with social preview:
 
 ---
 
-<table>
-  <tr>
-    <td width="68%" valign="top">
-
 ## Why Spotycast exists
 
 Many audio stacks break at the exact place that should be the simplest: the reusable source endpoint.
 
-DACs are fine. Renderers are fine. Network players are fine.  
+DACs are fine.  
+Renderers are fine.  
+Network players are fine.
+
 What often disappears is the **stable HTTP radio URL** you can point everything to.
 
 **Spotycast solves that gap** by republishing Spotify playback to Icecast, so your stack gets one resilient LAN stream endpoint that can be consumed almost anywhere.
@@ -50,60 +49,44 @@ It is especially useful when you want:
 - **a single HTTP stream URL for mixed players**
 - **a practical workaround for Spotify in ecosystems that do not integrate it natively**
 
-</td>
-<td width="42%" valign="top">
+---
 
-<div align="center">
+## At a glance
 
 ```text
 Spotify → PulseAudio → Liquidsoap → Icecast → Roon / LMS / Volumio / Players
 ```
 
-</div>
+**Stable path**  
+Spotify Connect or app upstream, one reusable stream downstream.
 
-<br>
+**Single URL**  
+One Icecast mountpoint for the whole LAN stack.
 
-<table>
-  <tr>
-    <td align="center"><strong>Stable path</strong></td>
-    <td align="center"><strong>Single URL</strong></td>
-    <td align="center"><strong>LAN friendly</strong></td>
-  </tr>
-  <tr>
-    <td align="center">Spotify Connect or app</td>
-    <td align="center">One Icecast mount</td>
-    <td align="center">Works like radio</td>
-  </tr>
-</table>
-
-</td>
-  </tr>
-</table>
+**LAN friendly**  
+Works like a radio endpoint that many players already understand.
 
 ---
 
 ## Best entry points
 
-<table>
-  <tr>
-    <td><strong>Spotify with Roon</strong><br><a href="https://spotycast.ovh/spotify-with-roon/">Use Spotify as a stable stream source for Roon-based setups</a></td>
-  </tr>
-  <tr>
-    <td><strong>Spotify to Icecast</strong><br><a href="https://spotycast.ovh/spotify-to-icecast/">Publish Spotify playback as an HTTP / Icecast endpoint</a></td>
-  </tr>
-  <tr>
-    <td><strong>Installation guide</strong><br><a href="https://spotycast.ovh/how-to-install/">Install Spotycast on Debian or Docker</a></td>
-  </tr>
-  <tr>
-    <td><strong>How it works</strong><br><a href="https://spotycast.ovh/how-it-works/">Architecture, pipeline and signal flow</a></td>
-  </tr>
-  <tr>
-    <td><strong>Spotify Lossless and Roon</strong><br><a href="https://spotycast.ovh/spotify-lossless-roon/">What “lossless Spotify with Roon” really means in practice</a></td>
-  </tr>
-  <tr>
-    <td><strong>FAQ</strong><br><a href="https://spotycast.ovh/faq/">Answers about latency, quality, compatibility and usage</a></td>
-  </tr>
-</table>
+- **Spotify with Roon**  
+  https://spotycast.ovh/spotify-with-roon/
+
+- **Spotify to Icecast**  
+  https://spotycast.ovh/spotify-to-icecast/
+
+- **Installation guide**  
+  https://spotycast.ovh/how-to-install/
+
+- **How it works**  
+  https://spotycast.ovh/how-it-works/
+
+- **Spotify Lossless with Roon**  
+  https://spotycast.ovh/spotify-lossless-roon/
+
+- **FAQ**  
+  https://spotycast.ovh/faq/
 
 ---
 
@@ -146,16 +129,18 @@ What it does is often more practical in real-world systems:
 
 That makes Spotycast a good fit when the goal is not theoretical purity but **operational reliability in a real network audio stack**.
 
-Read more:  
-**<a href="https://spotycast.ovh/spotify-with-roon/">Spotify with Roon</a>**  
-**<a href="https://spotycast.ovh/spotify-lossless-roon/">Spotify Lossless with Roon</a>**
+Read more:
+
+- https://spotycast.ovh/spotify-with-roon/
+- https://spotycast.ovh/spotify-lossless-roon/
 
 ---
 
 ## Two upstream paths, one output philosophy
 
-Spotycast is centered around the same downstream idea:  
-**publish one reliable Icecast / HTTP endpoint for the rest of the system**.
+Spotycast is centered around the same downstream idea:
+
+**publish one reliable Icecast / HTTP endpoint for the rest of the system**
 
 ### 1) Stable Spotify Connect path
 
@@ -180,8 +165,9 @@ Use it when your priority is:
 - stronger control over the bridge behavior
 - working around ecosystem limitations in legacy or hybrid environments
 
-Details:  
-**<a href="https://spotycast.ovh/version-premium/">Premium / advanced mode</a>**
+Details:
+
+- https://spotycast.ovh/version-premium/
 
 ---
 
@@ -206,31 +192,29 @@ That is the core idea behind Spotycast:
 
 ## Architecture
 
-<table>
-  <tr>
-    <td align="center"><strong>Input</strong></td>
-    <td align="center"><strong>Bridge</strong></td>
-    <td align="center"><strong>Output</strong></td>
-    <td align="center"><strong>Consumers</strong></td>
-  </tr>
-  <tr>
-    <td align="center">Spotify Connect / Spotify app</td>
-    <td align="center">PulseAudio + Liquidsoap</td>
-    <td align="center">Icecast mount / HTTP stream</td>
-    <td align="center">Roon / LMS / Volumio / players</td>
-  </tr>
-</table>
+### Input
+Spotify Connect or Spotify app
+
+### Bridge
+PulseAudio + Liquidsoap
+
+### Output
+Icecast mount / HTTP stream
+
+### Consumers
+Roon / LMS / Volumio / network players
 
 ### Pipeline at a glance
 
 - **Spotify** provides the source playback
-- **PulseAudio** captures / routes the audio
+- **PulseAudio** captures or routes the audio
 - **Liquidsoap** republishes it
 - **Icecast** exposes the resulting mountpoint
 - your playback clients consume the stream like a standard radio source
 
-Architecture page:  
-**<a href="https://spotycast.ovh/how-it-works/">How Spotycast works</a>**
+Architecture page:
+
+- https://spotycast.ovh/how-it-works/
 
 ---
 
@@ -257,8 +241,9 @@ http://<HOST>:28000
 
 Copy the relevant mountpoint URL and add it as a radio stream in your player.
 
-Full installation walkthrough:  
-**<a href="https://spotycast.ovh/how-to-install/">Installation guide</a>**
+Full installation walkthrough:
+
+- https://spotycast.ovh/how-to-install/
 
 ---
 
@@ -268,13 +253,15 @@ Full installation walkthrough:
 
 You want a simple, stable HTTP stream exposed from Spotify playback.
 
-Read: **<a href="https://spotycast.ovh/spotify-to-icecast/">Spotify to Icecast</a>**
+Read:
+- https://spotycast.ovh/spotify-to-icecast/
 
 ### Spotify with Roon
 
 You want Roon to consume Spotify through a stable endpoint.
 
-Read: **<a href="https://spotycast.ovh/spotify-with-roon/">Spotify with Roon</a>**
+Read:
+- https://spotycast.ovh/spotify-with-roon/
 
 ### Mixed-player home audio stack
 
@@ -297,7 +284,7 @@ Important points:
 - it is **not** a strict bit-perfect DAC path
 - it introduces a republishing layer
 - it depends on Spotify playback behavior upstream
-- it adds normal stream-style buffering / latency
+- it adds normal stream-style buffering and latency
 
 That trade-off is explicit:
 
@@ -306,8 +293,9 @@ That trade-off is explicit:
 
 For many practical systems, that is the better engineering compromise.
 
-More context:  
-**<a href="https://spotycast.ovh/spotify-lossless-roon/">Spotify Lossless with Roon</a>**
+More context:
+
+- https://spotycast.ovh/spotify-lossless-roon/
 
 ---
 
@@ -345,7 +333,7 @@ No. It is a republishing bridge, not a strict bit-perfect transport chain.
 
 ### Does Spotycast work with LMS or Lyrion?
 
-Yes, the whole idea is to expose a standard HTTP / Icecast stream that LMS-compatible players can consume.
+Yes. The whole idea is to expose a standard HTTP / Icecast stream that LMS-compatible players can consume.
 
 ### Does this help with Spotify Lossless in Roon?
 
@@ -359,21 +347,49 @@ Because Icecast gives you a standard, reusable, inspectable HTTP endpoint that m
 
 ## Related resources
 
-- <a href="https://spotycast.ovh/">Spotycast website</a>
-- <a href="https://spotycast.ovh/spotify-with-roon/">Spotify with Roon</a>
-- <a href="https://spotycast.ovh/spotify-to-icecast/">Spotify to Icecast</a>
-- <a href="https://spotycast.ovh/how-it-works/">How it works</a>
-- <a href="https://spotycast.ovh/how-to-install/">Installation guide</a>
-- <a href="https://spotycast.ovh/spotify-lossless-roon/">Spotify Lossless with Roon</a>
-- <a href="https://spotycast.ovh/faq/">FAQ</a>
-- <a href="https://spotycast.ovh/version-premium/">Premium / advanced mode</a>
+- https://spotycast.ovh/
+- https://spotycast.ovh/spotify-with-roon/
+- https://spotycast.ovh/spotify-to-icecast/
+- https://spotycast.ovh/how-it-works/
+- https://spotycast.ovh/how-to-install/
+- https://spotycast.ovh/spotify-lossless-roon/
+- https://spotycast.ovh/faq/
+- https://spotycast.ovh/version-premium/
 
 ---
 
+## Suggested GitHub repository topics
+
+If you want to maximize discovery on GitHub, these are strong candidate topics for this repo:
+
+```text
+spotify
+spotify-connect
+spotifyd
+icecast
+liquidsoap
+roon
+lms
+lyrion
+volumio
+http-stream
+internet-radio
+self-hosted
+docker
+docker-compose
+debian
+network-audio
+headless-audio
+spotify-lossless
+spotify-bridge
+icecast-stream
+```
+
+---
 
 ## License
 
-MIT — see <a href="./LICENSE">LICENSE</a>.
+MIT — see [LICENSE](./LICENSE).
 
 ---
 
